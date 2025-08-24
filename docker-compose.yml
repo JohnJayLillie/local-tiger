@@ -1,0 +1,26 @@
+# In your tiger directory, create docker-compose.yml
+version: '3.8'
+services:
+  tiger-postgres:
+    image: postgres:15-alpine
+    container_name: tiger-postgres
+    environment:
+      POSTGRES_DB: tiger_local
+      POSTGRES_USER: tiger_user
+      POSTGRES_PASSWORD: tiger_local_pass
+    ports:
+      - "5432:5432"
+    volumes:
+      - tiger_postgres_data:/var/lib/postgresql/data
+    
+  tiger-redis:
+    image: redis:7-alpine
+    container_name: tiger-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - tiger_redis_data:/data
+
+volumes:
+  tiger_postgres_data:
+  tiger_redis_data:

@@ -1,0 +1,50 @@
+                ))}
+              </div>
+            </section>
+          )}
+
+          {/* Stats Footer */}
+          <footer style={{ 
+            textAlign: 'center', 
+            padding: '4rem 0', 
+            borderTop: '1px solid rgba(255, 255, 255, 0.1)',
+            marginTop: '4rem'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              justifyContent: 'center', 
+              gap: '3rem',
+              marginBottom: '2rem'
+            }}>
+              {[
+                { value: '3.9min', label: 'Average Generation Time' },
+                { value: '4K', label: 'Image Resolution' },
+                { value: '99.8%', label: 'Success Rate' },
+                { value: '24/7', label: 'Available' }
+              ].map((stat, i) => (
+                <div key={i}>
+                  <div style={{ 
+                    color: '#FF6B35', 
+                    fontWeight: 'bold', 
+                    fontSize: '2rem',
+                    marginBottom: '0.5rem'
+                  }}>
+                    {stat.value}
+                  </div>
+                  <div style={{ color: '#9ca3af', fontSize: '0.875rem' }}>
+                    {stat.label}
+                  </div>
+                </div>
+              ))}
+            </div>
+            <p style={{ color: '#9ca3af', fontSize: '0.875rem' }}>
+              Powered by Tiger AI • DALL-E 3 Generation • Production v1.0.0 • 2025
+            </p>
+          </footer>
+
+        </main>
+      </div>
+    </>
+  );
+}

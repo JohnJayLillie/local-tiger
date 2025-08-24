@@ -1,0 +1,100 @@
+import { useState } from 'react';
+import Head from 'next/head';
+
+export default function TigerTrueCrime() {
+  const [storyInput, setStoryInput] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [progressStatus, setProgressStatus] = useState('');
+  const [progressTime, setProgressTime] = useState('0:00');
+  const [showResults, setShowResults] = useState(false);
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState('');
+
+  const handleInputChange = (e) => {
+    setStoryInput(e.target.value);
+    setError(''); // Clear any previous errors
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (storyInput.length < 10) return;
+
+    setIsGenerating(true);
+    setShowProgress(true);
+    setShowResults(false);
+    setError('');
+    setProgress(0);
+    setProgressStatus('Initializing AI systems...');
+
+    // Start progress animation
+    let currentProgress = 0;
+    let stageIndex = 0;
+    const stages = [
+      'Analyzing story concept...',
+      'Generating narrative structure...',
+      'Creating DALL-E 3 prompts...',
+      'Generating documentary images...',
+      'Processing and optimizing...',
+      'Finalizing results...'
+    ];
+    const startTime = Date.now();
+
+    const progressInterval = setInterval(() => {
+      currentProgress += Math.random() * 8;
+      if (currentProgress > 95) currentProgress = 95; // Stop at 95% until real completion
+
+      setProgress(currentProgress);
+      
+      // Update timer
+      const elapsed = Math.floor((Date.now() - startTime) / 1000);
+      const minutes = Math.floor(elapsed / 60);
+      const seconds = elapsed % 60;
+      setProgressTime(`${minutes}:${seconds.toString().padStart(2, '0')}`);
+
+      // Update stage
+      const expectedStage = Math.floor((currentProgress / 100) * stages.length);
+      if (expectedStage < stages.length && expectedStage !== stageIndex) {
+        stageIndex = expectedStage;
+        setProgressStatus(stages[stageIndex]);
+      }
+    }, 300);
+
+    try {
+      // Call the real AI API
+      const response = await fetch('http://localhost:3000/api/truecrime-generate', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          story: storyInput,
+          options: {
+            imageCount: 3,
+            size: '1024x1024'
+          }
+        })
+      });
+
+      const data = await response.json();
+
+      if (!data.success) {
+        throw new Error(data.error || 'Generation failed');
+      }
+
+      // Complete progress
+      clearInterval(progressInterval);
+      setProgress(100);
+      setProgressStatus('Generation complete!');
+
+      // Process results
+      const generatedResults = data.data.images.map((image, index) => ({
+        id: index + 1,
+        title: `Crime Scene ${index + 1}`,
+        description: `Documentary-style visualization`,
+        imageUrl: image.url,
+        prompt: data.data.prompt
+      }));
+

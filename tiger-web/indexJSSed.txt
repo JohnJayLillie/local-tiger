@@ -1,0 +1,81 @@
+        <title>🐅 Tiger True Crime AI</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Head>
+
+      <div style={{ minHeight: '100vh', backgroundColor: '#0A0A0A', color: 'white' }}>
+        {/* Header */}
+        <header style={{ padding: '2rem 0', borderBottom: '1px solid rgba(255,255,255,0.1)' }}>
+          <div style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
+                <span style={{ fontSize: '3rem' }}>🐅</span>
+                <div>
+                  <h1 style={{ 
+                    fontSize: '2rem', 
+                    fontWeight: 'bold',
+                    background: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+                    WebkitBackgroundClip: 'text',
+                    WebkitTextFillColor: 'transparent',
+                    marginBottom: '0.5rem'
+                  }}>
+                    Tiger AI
+                  </h1>
+                  <p style={{ color: '#9ca3af', fontSize: '1rem' }}>True Crime Documentary Generator</p>
+                </div>
+              </div>
+              <div style={{ textAlign: 'right' }}>
+                <div style={{ color: '#4ade80', fontSize: '0.875rem', marginBottom: '0.25rem' }}>● Online</div>
+                <div style={{ color: '#9ca3af', fontSize: '0.875rem' }}>v1.0.0 Production Ready</div>
+              </div>
+            </div>
+          </div>
+        </header>
+
+        {/* Main Content */}
+        <main style={{ maxWidth: '1200px', margin: '0 auto', padding: '0 2rem' }}>
+          
+          {/* Hero Section */}
+          <section style={{ textAlign: 'center', padding: '4rem 0' }}>
+            <h2 style={{ fontSize: '3.5rem', fontWeight: 'bold', marginBottom: '2rem' }}>
+              <span style={{ color: 'white' }}>AI-Powered </span>
+              <span style={{ 
+                background: 'linear-gradient(135deg, #FF6B35 0%, #F7931E 100%)',
+                WebkitBackgroundClip: 'text',
+                WebkitTextFillColor: 'transparent'
+              }}>True Crime</span>
+              <span style={{ color: 'white' }}> Generator</span>
+            </h2>
+            
+            <p style={{ fontSize: '1.5rem', color: '#d1d5db', marginBottom: '3rem' }}>
+              Create professional documentary images with{' '}
+              <span style={{ color: '#FF6B35', fontWeight: '600' }}>DALL-E 3</span>
+            </p>
+
+            {/* Feature Pills */}
+            <div style={{ 
+              display: 'flex', 
+              flexWrap: 'wrap', 
+              justifyContent: 'center', 
+              gap: '1rem',
+              marginBottom: '3rem'
+            }}>
+              {[
+                { color: '#60a5fa', text: 'DALL-E 3 Powered' },
+                { color: '#4ade80', text: 'GPT-4 Narratives' },
+                { color: '#c084fc', text: 'Documentary Quality' },
+                { color: '#fb923c', text: '4K Resolution' }
+              ].map((feature, i) => (
+                <div key={i} style={{
+                  padding: '0.75rem 1.5rem',
+                  background: 'rgba(26, 26, 26, 0.8)',
+                  border: '1px solid rgba(255, 255, 255, 0.1)',
+                  borderRadius: '9999px',
+                  fontSize: '0.875rem',
+                  backdropFilter: 'blur(10px)'
+                }}>
+                  <span style={{ color: feature.color }}>●</span> {feature.text}
+                </div>
+              ))}
+            </div>
+          </section>
+

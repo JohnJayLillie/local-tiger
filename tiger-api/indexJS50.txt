@@ -1,0 +1,50 @@
+import { useState } from 'react';
+import Head from 'next/head';
+
+export default function TigerTrueCrime() {
+  const [storyInput, setStoryInput] = useState('');
+  const [isGenerating, setIsGenerating] = useState(false);
+  const [showProgress, setShowProgress] = useState(false);
+  const [progress, setProgress] = useState(0);
+  const [progressStatus, setProgressStatus] = useState('');
+  const [progressTime, setProgressTime] = useState('0:00');
+  const [showResults, setShowResults] = useState(false);
+  const [results, setResults] = useState([]);
+  const [error, setError] = useState('');
+
+  const handleInputChange = (e) => {
+    setStoryInput(e.target.value);
+    setError(''); // Clear any previous errors
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    
+    if (storyInput.length < 10) return;
+
+    setIsGenerating(true);
+    setShowProgress(true);
+    setShowResults(false);
+    setError('');
+    setProgress(0);
+    setProgressStatus('Initializing AI systems...');
+
+    // Start progress animation
+    let currentProgress = 0;
+    let stageIndex = 0;
+    const stages = [
+      'Analyzing story concept...',
+      'Generating narrative structure...',
+      'Creating DALL-E 3 prompts...',
+      'Generating documentary images...',
+      'Processing and optimizing...',
+      'Finalizing results...'
+    ];
+    const startTime = Date.now();
+
+    const progressInterval = setInterval(() => {
+      currentProgress += Math.random() * 8;
+      if (currentProgress > 95) currentProgress = 95; // Stop at 95% until real completion
+
+      setProgress(currentProgress);
+      
