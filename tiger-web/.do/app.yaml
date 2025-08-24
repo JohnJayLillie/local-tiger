@@ -1,0 +1,211 @@
+# .do/app.yaml - DigitalOcean App Platform Configuration
+name: tiger-true-crime-production
+region: nyc
+services:
+- name: tiger-web
+  source_dir: /
+  github:
+    repo: YOUR_GITHUB_USERNAME/tiger-production
+    branch: main
+    deploy_on_push: true
+  build_command: npm run build
+  run_command: npm start
+  environment_slug: node-js
+  instance_count: 1
+  instance_size_slug: basic-xs  # $12/month
+  http_port: 3000
+  routes:
+  - path: /
+  health_check:
+    http_path: /api/status
+    initial_delay_seconds: 30
+    period_seconds: 10
+    timeout_seconds: 5
+    success_threshold: 1
+    failure_threshold: 3
+  envs:
+  - key: NODE_ENV
+    value: production
+  - key: PORT
+    value: "3000"
+  - key: OPENAI_API_KEY
+    value: YOUR_OPENAI_API_KEY_HERE
+    type: SECRET
+  - key: SUPABASE_URL
+    value: YOUR_SUPABASE_URL_HERE
+    type: SECRET
+  - key: SUPABASE_SERVICE_KEY
+    value: YOUR_SUPABASE_SERVICE_KEY_HERE
+    type: SECRET
+  - key: ALLOWED_ORIGINS
+    value: https://tiger-true-crime-production-xxx.ondigitalocean.app
+# Optional: Add custom domain
+# domains:
+# - domain: tiger-ai.com
+#   type: PRIMARY
+# - domain: www.tiger-ai.com
+#   type: ALIAS
+
+---
+# package.json updates for production
+{
+  "name": "tiger-true-crime-production",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start",
+    "lint": "next lint",
+    "export": "next export"
+  },
+  "dependencies": {
+    "next": "^14.0.4",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "openai": "^4.20.1",
+    "@supabase/supabase-js": "^2.38.5",
+    "tailwindcss": "^3.4.0",
+    "autoprefixer": "^10.4.16",
+    "postcss": "^8.4.32"
+  },
+  "devDependencies": {
+    "eslint": "^8.0.0",
+    "eslint-config-next": "^14.0.4",
+    "@types/node": "^20.0.0",
+    "@types/react": "^18.2.0",
+    "@types/react-dom": "^18.2.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": "18.x",
+    "npm": "9.x"
+  }
+}
+
+---
+# next.config.js - Production optimizations
+/** @type {import('next').NextConfig} */
+const nextConfig = {
+  reactStrictMode: true,
+  swcMinify: true,
+  compress: true,
+  poweredByHeader: false,
+  generateEtags: true,
+  
+  // Image optimization
+  images: {
+    remotePatterns: [
+      {
+        protocol: 'https',
+        hostname: 'oaidalleapiprodscus.blob.core.windows.net',
+      },
+      {
+        protocol: 'https',
+        hostname: 'images.unsplash.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'picsum.photos',
+      }
+    ],
+    formats: ['image/webp', 'image/avif'],
+  },
+
+  // Security headers
+  async headers() {
+    return [
+      {
+        source: '/(.*)',
+        headers: [
+          {
+            key: 'X-Frame-Options',
+            value: 'DENY'
+          },
+          {
+            key: 'X-Content-Type-Options',
+            value: 'nosniff'
+          },
+          {
+            key: 'Referrer-Policy',
+            value: 'strict-origin-when-cross-origin'
+          },
+          {
+            key: 'Content-Security-Policy',
+            value: "default-src 'self'; img-src 'self' data: https: blob:; script-src 'self' 'unsafe-eval' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; connect-src 'self' https://api.openai.com https://*.supabase.co;"
+          }
+        ]
+      }
+    ];
+  },
+
+  // API route optimization
+  async rewrites() {
+    return [
+      {
+        source: '/health',
+        destination: '/api/status'
+      }
+    ];
+  }
+};
+
+module.exports = nextConfig;
+
+---
+# .dockerignore - If using Docker deployment
+node_modules
+.next
+out
+.git
+.gitignore
+README.md
+.env*
+.DS_Store
+*.log
+coverage
+.nyc_output
+
+---
+# Dockerfile - Alternative Docker deployment
+FROM node:18-alpine AS base
+
+# Install dependencies only when needed
+FROM base AS deps
+WORKDIR /app
+COPY package.json package-lock.json* ./
+RUN npm ci
+
+# Rebuild the source code only when needed
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+COPY . .
+
+# Build Next.js
+RUN npm run build
+
+# Production image
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copy built application
+COPY --from=builder /app/public ./public
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+ENV PORT=3000
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=3s --start-period=40s --retries=3 \
+  CMD curl -f http://localhost:3000/api/status || exit 1
+
+CMD ["node", "server.js"]

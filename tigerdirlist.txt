@@ -1,0 +1,14 @@
+total 3912
+drwxr-xr-x  13 johnlillie  staff      416 Aug 22 09:03 .
+drwxr-x---+ 65 johnlillie  staff     2080 Aug 22 09:01 ..
+-rw-r--r--@  1 johnlillie  staff     6148 Aug 21 00:27 .DS_Store
+drwxr-xr-x@ 14 johnlillie  staff      448 Aug 21 19:44 .git
+-rw-r--r--@  1 johnlillie  staff      110 Aug 20 23:45 .gitignore
+drwxr-xr-x   3 johnlillie  staff       96 Aug 21 00:28 .vscode
+drwxr-xr-x  18 johnlillie  staff      576 Aug 20 23:42 tiger-api
+drwxr-xr-x  20 johnlillie  staff      640 Aug 20 23:33 tiger-app
+drwxr-xr-x@ 18 johnlillie  staff      576 Aug 21 19:28 tiger-web
+-rw-r--r--   1 johnlillie  staff        0 Aug 22 09:03 tigerdirlist.txt
+-rw-------   1 johnlillie  staff      411 Aug 19 15:14 tigerGIT
+-rw-r--r--   1 johnlillie  staff      103 Aug 19 15:14 tigerGIT.pub
+-rw-r--r--   1 johnlillie  staff  1979093 Aug 20 09:05 tigertree.txt

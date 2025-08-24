@@ -1,0 +1,39 @@
+# Environment Variables (CRITICAL - Never commit API keys!)
+.env
+.env.local
+.env.production
+*.env
+
+# Dependencies
+node_modules/
+npm-debug.log*
+
+# Next.js builds
+.next/
+out/
+build/
+dist/
+
+# Database files
+*.sqlite
+*.db
+
+# Logs
+logs/
+*.log
+
+# Uploads
+uploads/
+tiger-api/uploads/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# IDE files
+.vscode/
+.idea/
+
+# Temporary files
+tmp/
+temp/

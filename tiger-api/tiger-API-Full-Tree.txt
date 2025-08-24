@@ -1,0 +1,34 @@
+.
+├── node_modules
+│   ├── @anthropic-ai
+│   ├── @emnapi
+│   ├── @supabase
+│   └── @types
+├── openai-service.js
+├── package-lock.json
+├── package.json
+├── pages
+│   └── api
+│       ├── status.js
+│       └── tiger
+│           ├── episode
+│           │   └── [id].js
+│           └── generate-episode.js
+├── prompt-engine.js
+├── routes
+│   └── tiger-pipeline.js
+├── services
+│   ├── anthropic-service.js
+│   ├── openai-service.js
+│   ├── runway-video-service.js
+│   └── true-crime-image-service.js
+├── test-ai.js
+├── test-services.js
+├── test-true-crime.js
+├── tiger-API-Full-Tree.txt
+├── tiger-apiDirTere.txt
+├── tiger-apiTree.txt
+├── tiger-complete-test.js
+└── tigerapiTREE.txt
+
+12 directories, 20 files
