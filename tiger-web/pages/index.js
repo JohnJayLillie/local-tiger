@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import Head from 'next/head';
 
 export default function TigerTrueCrimeProduction() {
+  const [activeTab, setActiveTab] = useState('basic');
   const [formData, setFormData] = useState({
     caseTitle: '',
     crimeCategory: 'serial-killers',
@@ -388,189 +389,197 @@ export default function TigerTrueCrimeProduction() {
                 overflow: 'visible'
               }}>
                 
-                {/* Case Title */}
-                <div style={{ marginBottom: '2rem' }}>
-                  <label style={{ 
-                    display: 'block', 
-                    fontSize: '1rem', 
-                    fontWeight: '600', 
-                    marginBottom: '0.5rem',
-                    color: '#ffffff'
-                  }}>
-                    📖 Case Title or Topic to Research
-                  </label>
-                  <input
-                    type="text"
-                    value={formData.caseTitle}
-                    onChange={(e) => handleInputChange('caseTitle', e.target.value)}
-                    placeholder="Enter case title, criminal name, or topic (e.g., 'Ted Bundy', 'Golden State Killer')"
+              {/* Tab Navigation */}
+              <div style={{ 
+                display: 'flex', 
+                borderBottom: '1px solid rgba(255, 255, 255, 0.1)',
+                marginBottom: '2rem'
+              }}>
+                {[
+                  { id: 'basic', label: '📝 Basic Info', icon: '📝' },
+                  { id: 'content', label: '🎬 Content Setup', icon: '🎬' },
+                  { id: 'people', label: '👥 Characters & Locations', icon: '👥' },
+                  { id: 'images', label: '📸 Image Generation', icon: '📸' }
+                ].map((tab) => (
+                  <button
+                    key={tab.id}
+                    type="button"
+                    onClick={() => setActiveTab(tab.id)}
                     style={{
-                      width: '100%',
-                      padding: '1rem',
-                      backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                      border: '2px solid #374151',
-                      borderRadius: '0.75rem',
-                      color: 'white',
-                      fontSize: '1rem',
-                      outline: 'none'
+                      padding: '1rem 1.5rem',
+                      background: activeTab === tab.id ? 'rgba(220, 38, 38, 0.2)' : 'transparent',
+                      color: activeTab === tab.id ? '#fca5a5' : '#9ca3af',
+                      border: 'none',
+                      borderBottom: activeTab === tab.id ? '2px solid #dc2626' : '2px solid transparent',
+                      fontSize: '0.875rem',
+                      fontWeight: '600',
+                      cursor: 'pointer',
+                      transition: 'all 0.3s ease',
+                      whiteSpace: 'nowrap'
                     }}
-                    required
-                  />
-                  <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.5rem' }}>
-                    AI will research this topic and generate comprehensive content
-                  </p>
-                </div>
+                  >
+                    {tab.label}
+                  </button>
+                ))}
+              </div>
 
-                {/* Category and Time Period */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
-                      🏷️ Crime Category
-                    </label>
-                    <select
-                      value={formData.crimeCategory}
-                      onChange={(e) => handleInputChange('crimeCategory', e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        border: '2px solid #374151',
-                        borderRadius: '0.5rem',
-                        color: 'white',
-                        fontSize: '0.875rem'
-                      }}
-                    >
-                      {crimeCategories.map(category => (
-                        <option key={category.value} value={category.value} style={{ backgroundColor: '#1f2937' }}>
-                          {category.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
-                      📅 Time Period
-                    </label>
-                    <select
-                      value={formData.timePeriod}
-                      onChange={(e) => handleInputChange('timePeriod', e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        border: '2px solid #374151',
-                        borderRadius: '0.5rem',
-                        color: 'white',
-                        fontSize: '0.875rem'
-                      }}
-                    >
-                      {timePeriods.map(period => (
-                        <option key={period.value} value={period.value} style={{ backgroundColor: '#1f2937' }}>
-                          {period.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-                </div>
-
-                {/* Content Type and Length */}
-                <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
-                      🎥 Content Format
-                    </label>
-                    <select
-                      value={formData.contentType}
-                      onChange={(e) => handleInputChange('contentType', e.target.value)}
-                      style={{
-                        width: '100%',
-                        padding: '0.75rem',
-                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                        border: '2px solid #374151',
-                        borderRadius: '0.5rem',
-                        color: 'white',
-                        fontSize: '0.875rem'
-                      }}
-                    >
-                      {contentTypes.map(type => (
-                        <option key={type.value} value={type.value} style={{ backgroundColor: '#1f2937' }}>
-                          {type.label}
-                        </option>
-                      ))}
-                    </select>
-                  </div>
-
-                  <div>
-                    <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
-                      ⏱️ Episode Length: {formData.episodeLength} minutes
+              {/* Tab Content */}
+              {activeTab === 'basic' && (
+                <div>
+                  {/* Case Title */}
+                  <div style={{ marginBottom: '2rem' }}>
+                    <label style={{ 
+                      display: 'block', 
+                      fontSize: '1rem', 
+                      fontWeight: '600', 
+                      marginBottom: '0.5rem',
+                      color: '#ffffff'
+                    }}>
+                      📖 Case Title or Topic to Research
                     </label>
                     <input
-                      type="range"
-                      min="5"
-                      max="25"
-                      value={formData.episodeLength}
-                      onChange={(e) => handleInputChange('episodeLength', parseInt(e.target.value))}
-                      style={{ width: '100%', marginBottom: '0.5rem' }}
+                      type="text"
+                      value={formData.caseTitle}
+                      onChange={(e) => handleInputChange('caseTitle', e.target.value)}
+                      placeholder="Enter case title, criminal name, or topic (e.g., 'Ted Bundy', 'Golden State Killer')"
+                      style={{
+                        width: '100%',
+                        padding: '1rem',
+                        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                        border: '2px solid #374151',
+                        borderRadius: '0.75rem',
+                        color: 'white',
+                        fontSize: '1rem',
+                        outline: 'none'
+                      }}
+                      required
                     />
-                    <div style={{ fontSize: '0.75rem', color: '#9ca3af' }}>
-                      Approximately {estimatedSegments} segments
-                    </div>
+                    <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginTop: '0.5rem' }}>
+                      AI will research this topic and generate comprehensive content
+                    </p>
                   </div>
-                </div>
 
-                {/* Image Options */}
-                <div style={{ 
-                  background: 'rgba(0, 0, 0, 0.3)', 
-                  borderRadius: '0.75rem', 
-                  padding: '1.5rem',
-                  marginBottom: '2rem'
-                }}>
-                  <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#ffffff' }}>
-                    📸 Image Generation Options
-                  </h3>
-                  
-                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                  {/* Category and Time Period */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#d1d5db' }}>
-                        🎨 Image Style
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
+                        🏷️ Crime Category
                       </label>
                       <select
-                        value={formData.imageStyle}
-                        onChange={(e) => handleInputChange('imageStyle', e.target.value)}
+                        value={formData.crimeCategory}
+                        onChange={(e) => handleInputChange('crimeCategory', e.target.value)}
                         style={{
                           width: '100%',
                           padding: '0.75rem',
                           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                          border: '1px solid #374151',
+                          border: '2px solid #374151',
                           borderRadius: '0.5rem',
                           color: 'white',
                           fontSize: '0.875rem'
                         }}
                       >
-                        {imageStyles.map(style => (
-                          <option key={style.value} value={style.value} style={{ backgroundColor: '#1f2937' }}>
-                            {style.label}
+                        {crimeCategories.map(category => (
+                          <option key={category.value} value={category.value} style={{ backgroundColor: '#1f2937' }}>
+                            {category.label}
                           </option>
                         ))}
                       </select>
                     </div>
 
                     <div>
-                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#d1d5db' }}>
-                        🔢 Images Per Segment
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
+                        📅 Time Period
                       </label>
-                      <input
-                        type="number"
-                        min="1"
-                        max="4"
-                        value={formData.imagesPerSegment}
-                        onChange={(e) => handleInputChange('imagesPerSegment', parseInt(e.target.value) || 2)}
+                      <select
+                        value={formData.timePeriod}
+                        onChange={(e) => handleInputChange('timePeriod', e.target.value)}
                         style={{
                           width: '100%',
                           padding: '0.75rem',
                           backgroundColor: 'rgba(0, 0, 0, 0.5)',
-                          border: '1px solid #374151',
+                          border: '2px solid #374151',
+                          borderRadius: '0.5rem',
+                          color: 'white',
+                          fontSize: '0.875rem'
+                        }}
+                      >
+                        {timePeriods.map(period => (
+                          <option key={period.value} value={period.value} style={{ backgroundColor: '#1f2937' }}>
+                            {period.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'content' && (
+                <div>
+                  {/* Content Type, Episode Length & Segments */}
+                  <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr', gap: '1rem', marginBottom: '2rem' }}>
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
+                        🎥 Content Format
+                      </label>
+                      <select
+                        value={formData.contentType}
+                        onChange={(e) => handleInputChange('contentType', e.target.value)}
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem',
+                          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                          border: '2px solid #374151',
+                          borderRadius: '0.5rem',
+                          color: 'white',
+                          fontSize: '0.875rem'
+                        }}
+                      >
+                        {contentTypes.map(type => (
+                          <option key={type.value} value={type.value} style={{ backgroundColor: '#1f2937' }}>
+                            {type.label}
+                          </option>
+                        ))}
+                      </select>
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
+                        ⏱️ Episode Length (minutes)
+                      </label>
+                      <input
+                        type="number"
+                        min="5"
+                        max="25"
+                        value={formData.episodeLength}
+                        onChange={(e) => handleInputChange('episodeLength', parseInt(e.target.value) || 12)}
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem',
+                          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                          border: '2px solid #374151',
+                          borderRadius: '0.5rem',
+                          color: 'white',
+                          fontSize: '0.875rem'
+                        }}
+                      />
+                    </div>
+
+                    <div>
+                      <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '600', marginBottom: '0.5rem', color: '#ffffff' }}>
+                        📊 Segments Per Episode
+                      </label>
+                      <input
+                        type="number"
+                        min="5"
+                        max="30"
+                        value={formData.segmentsPerEpisode || estimatedSegments}
+                        onChange={(e) => handleInputChange('segmentsPerEpisode', parseInt(e.target.value) || estimatedSegments)}
+                        style={{
+                          width: '100%',
+                          padding: '0.75rem',
+                          backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                          border: '2px solid #374151',
                           borderRadius: '0.5rem',
                           color: 'white',
                           fontSize: '0.875rem'
@@ -578,22 +587,324 @@ export default function TigerTrueCrimeProduction() {
                       />
                     </div>
                   </div>
-
-                  <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}>
-                    <input
-                      type="checkbox"
-                      checked={formData.includePolaroids}
-                      onChange={(e) => handleInputChange('includePolaroids', e.target.checked)}
-                      style={{ width: '1.25rem', height: '1.25rem' }}
-                    />
-                    <span style={{ color: '#d1d5db', fontSize: '0.875rem' }}>
-                      📸 Generate Polaroid Evidence Style Images (Your Channel Signature)
-                    </span>
-                  </label>
-                  <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginLeft: '2rem', marginTop: '0.25rem' }}>
-                    Creates dual polaroid images: character portrait + crime scene location
-                  </p>
                 </div>
+              )}
+
+              {activeTab === 'people' && (
+                <div>
+                  {/* Characters Section */}
+                  <div style={{ marginBottom: '2rem' }}>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <label style={{ fontSize: '1rem', fontWeight: '600', color: '#ffffff' }}>
+                        👥 Key Characters (Optional - AI will research if left blank)
+                      </label>
+                      <button
+                        type="button"
+                        onClick={addCharacter}
+                        disabled={formData.characters.length >= 5}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          background: formData.characters.length >= 5 ? '#4b5563' : '#dc2626',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '0.5rem',
+                          fontSize: '0.875rem',
+                          cursor: formData.characters.length >= 5 ? 'not-allowed' : 'pointer'
+                        }}
+                      >
+                        + Add Character
+                      </button>
+                    </div>
+                    
+                    {formData.characters.map((character, index) => (
+                      <div key={index} style={{
+                        background: 'rgba(0, 0, 0, 0.3)',
+                        borderRadius: '0.75rem',
+                        padding: '1rem',
+                        marginBottom: '1rem',
+                        border: '1px solid rgba(255, 255, 255, 0.1)'
+                      }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '0.75rem', alignItems: 'end' }}>
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.25rem' }}>Name</label>
+                            <input
+                              type="text"
+                              placeholder="Character name (optional)"
+                              value={character.name}
+                              onChange={(e) => updateCharacter(index, 'name', e.target.value)}
+                              style={{
+                                width: '100%',
+                                padding: '0.5rem',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid #374151',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                fontSize: '0.875rem'
+                              }}
+                            />
+                          </div>
+                          
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.25rem' }}>Role</label>
+                            <select
+                              value={character.role}
+                              onChange={(e) => updateCharacter(index, 'role', e.target.value)}
+                              style={{
+                                width: '100%',
+                                padding: '0.5rem',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid #374151',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                fontSize: '0.875rem'
+                              }}
+                            >
+                              {characterRoles.map(role => (
+                                <option key={role.value} value={role.value} style={{ backgroundColor: '#1f2937' }}>
+                                  {role.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.25rem' }}>Description</label>
+                            <input
+                              type="text"
+                              placeholder="Brief description (optional)"
+                              value={character.description}
+                              onChange={(e) => updateCharacter(index, 'description', e.target.value)}
+                              style={{
+                                width: '100%',
+                                padding: '0.5rem',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid #374151',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                fontSize: '0.875rem'
+                              }}
+                            />
+                          </div>
+
+                          {formData.characters.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() => removeCharacter(index)}
+                              style={{
+                                padding: '0.5rem',
+                                background: '#dc2626',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '0.375rem',
+                                cursor: 'pointer',
+                                fontSize: '0.875rem'
+                              }}
+                            >
+                              ×
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Locations Section */}
+                  <div>
+                    <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '1rem' }}>
+                      <label style={{ fontSize: '1rem', fontWeight: '600', color: '#ffffff' }}>
+                        📍 Key Locations (Optional - AI will research if left blank)
+                      </label>
+                      <button
+                        type="button"
+                        onClick={addLocation}
+                        disabled={formData.locations.length >= 4}
+                        style={{
+                          padding: '0.5rem 1rem',
+                          background: formData.locations.length >= 4 ? '#4b5563' : '#dc2626',
+                          color: 'white',
+                          border: 'none',
+                          borderRadius: '0.5rem',
+                          fontSize: '0.875rem',
+                          cursor: formData.locations.length >= 4 ? 'not-allowed' : 'pointer'
+                        }}
+                      >
+                        + Add Location
+                      </button>
+                    </div>
+                    
+                    {formData.locations.map((location, index) => (
+                      <div key={index} style={{
+                        background: 'rgba(0, 0, 0, 0.3)',
+                        borderRadius: '0.75rem',
+                        padding: '1rem',
+                        marginBottom: '1rem',
+                        border: '1px solid rgba(255, 255, 255, 0.1)'
+                      }}>
+                        <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr 1fr auto', gap: '0.75rem', alignItems: 'end' }}>
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.25rem' }}>Name</label>
+                            <input
+                              type="text"
+                              placeholder="Location name (optional)"
+                              value={location.name}
+                              onChange={(e) => updateLocation(index, 'name', e.target.value)}
+                              style={{
+                                width: '100%',
+                                padding: '0.5rem',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid #374151',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                fontSize: '0.875rem'
+                              }}
+                            />
+                          </div>
+                          
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.25rem' }}>Type</label>
+                            <select
+                              value={location.significance}
+                              onChange={(e) => updateLocation(index, 'significance', e.target.value)}
+                              style={{
+                                width: '100%',
+                                padding: '0.5rem',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid #374151',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                fontSize: '0.875rem'
+                              }}
+                            >
+                              {locationTypes.map(type => (
+                                <option key={type.value} value={type.value} style={{ backgroundColor: '#1f2937' }}>
+                                  {type.label}
+                                </option>
+                              ))}
+                            </select>
+                          </div>
+
+                          <div>
+                            <label style={{ display: 'block', fontSize: '0.75rem', color: '#9ca3af', marginBottom: '0.25rem' }}>Description</label>
+                            <input
+                              type="text"
+                              placeholder="Description (optional)"
+                              value={location.description}
+                              onChange={(e) => updateLocation(index, 'description', e.target.value)}
+                              style={{
+                                width: '100%',
+                                padding: '0.5rem',
+                                backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                                border: '1px solid #374151',
+                                borderRadius: '0.375rem',
+                                color: 'white',
+                                fontSize: '0.875rem'
+                              }}
+                            />
+                          </div>
+
+                          {formData.locations.length > 1 && (
+                            <button
+                              type="button"
+                              onClick={() => removeLocation(index)}
+                              style={{
+                                padding: '0.5rem',
+                                background: '#dc2626',
+                                color: 'white',
+                                border: 'none',
+                                borderRadius: '0.375rem',
+                                cursor: 'pointer',
+                                fontSize: '0.875rem'
+                              }}
+                            >
+                              ×
+                            </button>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                </div>
+              )}
+
+              {activeTab === 'images' && (
+                <div>
+                  {/* Image Generation Options */}
+                  <div style={{ 
+                    background: 'rgba(0, 0, 0, 0.3)', 
+                    borderRadius: '0.75rem', 
+                    padding: '1.5rem',
+                    marginBottom: '2rem'
+                  }}>
+                    <h3 style={{ fontSize: '1.125rem', fontWeight: '600', marginBottom: '1rem', color: '#ffffff' }}>
+                      📸 Image Generation Options
+                    </h3>
+                    
+                    <div style={{ display: 'grid', gridTemplateColumns: '1fr 1fr', gap: '1rem', marginBottom: '1rem' }}>
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#d1d5db' }}>
+                          🎨 Image Style
+                        </label>
+                        <select
+                          value={formData.imageStyle}
+                          onChange={(e) => handleInputChange('imageStyle', e.target.value)}
+                          style={{
+                            width: '100%',
+                            padding: '0.75rem',
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            border: '1px solid #374151',
+                            borderRadius: '0.5rem',
+                            color: 'white',
+                            fontSize: '0.875rem'
+                          }}
+                        >
+                          {imageStyles.map(style => (
+                            <option key={style.value} value={style.value} style={{ backgroundColor: '#1f2937' }}>
+                              {style.label}
+                            </option>
+                          ))}
+                        </select>
+                      </div>
+
+                      <div>
+                        <label style={{ display: 'block', fontSize: '0.875rem', fontWeight: '500', marginBottom: '0.5rem', color: '#d1d5db' }}>
+                          🔢 Images Per Segment
+                        </label>
+                        <input
+                          type="number"
+                          min="1"
+                          max="4"
+                          value={formData.imagesPerSegment}
+                          onChange={(e) => handleInputChange('imagesPerSegment', parseInt(e.target.value) || 2)}
+                          style={{
+                            width: '100%',
+                            padding: '0.75rem',
+                            backgroundColor: 'rgba(0, 0, 0, 0.5)',
+                            border: '1px solid #374151',
+                            borderRadius: '0.5rem',
+                            color: 'white',
+                            fontSize: '0.875rem'
+                          }}
+                        />
+                      </div>
+                    </div>
+
+                    <label style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', cursor: 'pointer' }}>
+                      <input
+                        type="checkbox"
+                        checked={formData.includePolaroids}
+                        onChange={(e) => handleInputChange('includePolaroids', e.target.checked)}
+                        style={{ width: '1.25rem', height: '1.25rem' }}
+                      />
+                      <span style={{ color: '#d1d5db', fontSize: '0.875rem' }}>
+                        📸 Generate Polaroid Evidence Style Images (Your Channel Signature)
+                      </span>
+                    </label>
+                    <p style={{ fontSize: '0.75rem', color: '#9ca3af', marginLeft: '2rem', marginTop: '0.25rem' }}>
+                      Creates dual polaroid images: character portrait + crime scene location
+                    </p>
+                  </div>
+                </div>
+              )}
 
                 {/* Error Display */}
                 {error && (
