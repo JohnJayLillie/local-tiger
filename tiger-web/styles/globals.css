@@ -1,91 +1,200 @@
-* {
-  box-sizing: border-box;
-  margin: 0;
-  padding: 0;
+/* tiger-web/styles/globals.css - Complete CSS with Beautiful Colors */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  font-family: system-ui, sans-serif;
-  background: #0A0A0A;
-  color: white;
-  line-height: 1.6;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-/* Add proper spacing and layout fixes */
-.container {
-  max-width: 1200px;
-  margin: 0 auto;
-  padding: 2rem;
+/* Main background gradient */
+.main-bg {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #ff9a9e 100%);
+  min-height: 100vh;
 }
 
-.header {
-  padding: 2rem 0;
-  margin-bottom: 3rem;
+/* Header gradient */
+.header-bg {
+  background: linear-gradient(90deg, #667eea 0%, #764ba2 50%, #ff6b6b 100%);
 }
 
-.hero-section {
-  padding: 3rem 0;
-  margin-bottom: 4rem;
+/* Tab container with vibrant background */
+.tab-container-bg {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
 }
 
-.form-section {
-  padding: 3rem;
-  margin-bottom: 3rem;
-  min-height: 400px;
+/* Active tab styling */
+.tab-active {
+  background: white !important;
+  color: #667eea !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 }
 
-.form-group {
-  margin-bottom: 2rem;
+/* Hovered tab styling */
+.tab-hover {
+  background: rgba(255, 255, 255, 0.9) !important;
+  color: #5a67d8 !important;
 }
 
-.form-label {
-  display: block;
-  font-size: 1.25rem;
-  font-weight: 600;
-  margin-bottom: 1rem;
+/* Inactive tab styling */
+.tab-inactive {
+  background: rgba(255, 255, 255, 0.3) !important;
+  color: #2d3748 !important;
 }
 
-.form-textarea {
-  width: 100%;
-  min-height: 150px;
-  padding: 1.5rem;
-  font-size: 1rem;
-  line-height: 1.5;
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid #374151;
-  border-radius: 0.75rem;
-  color: white;
-  resize: vertical;
+/* Override default Tailwind colors for tabs */
+.bg-slate-100 {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
 }
 
-.form-select {
-  width: 100%;
-  padding: 1rem;
-  font-size: 1rem;
-  background: rgba(0, 0, 0, 0.5);
-  border: 2px solid #374151;
-  border-radius: 0.75rem;
-  color: white;
+.bg-slate-200 {
+  background: rgba(255, 255, 255, 0.3) !important;
+  color: #2d3748 !important;
 }
 
-.generate-button {
-  padding: 1.5rem 3rem;
-  font-size: 1.25rem;
-  font-weight: bold;
-  margin: 2rem 0;
+.bg-slate-50 {
+  background: rgba(255, 255, 255, 0.6) !important;
+  color: #2d3748 !important;
 }
 
-.stats-footer {
-  padding: 3rem 0;
-  margin-top: 4rem;
+.bg-white.text-purple-600 {
+  background: white !important;
+  color: #667eea !important;
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.2);
 }
 
-.feature-pills {
-  margin: 2rem 0;
-  padding: 1rem 0;
+/* Card styling with gradients */
+.card-purple {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
-.progress-section {
-  padding: 2rem;
-  margin: 2rem 0;
+.card-blue {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.card-orange {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+}
+
+.card-teal {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+}
+
+/* Button gradients */
+.btn-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(102, 126, 234, 0.3);
+}
+
+.btn-secondary {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-secondary:hover {
+  background: linear-gradient(135deg, #3182ce 0%, #0ea5e9 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(79, 172, 254, 0.3);
+}
+
+.btn-orange {
+  background: linear-gradient(135deg, #ff9a9e 0%, #fad0c4 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-orange:hover {
+  background: linear-gradient(135deg, #ff8a80 0%, #ffab91 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(255, 154, 158, 0.3);
+}
+
+.btn-teal {
+  background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+  transition: all 0.3s ease;
+}
+
+.btn-teal:hover {
+  background: linear-gradient(135deg, #81e6d9 0%, #fbb6ce 100%);
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(168, 237, 234, 0.3);
+}
+
+/* Scrollbar styling */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(to bottom, #667eea, #764ba2);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(to bottom, #5a67d8, #6b46c1);
+}
+
+/* Gradient text utilities */
+.text-gradient-primary {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.text-gradient-secondary {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* Loading animations */
+.loading-shimmer {
+  background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+  background-size: 200% 100%;
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+/* Glow effects */
+.glow-primary {
+  box-shadow: 0 0 20px rgba(102, 126, 234, 0.3);
+}
+
+.glow-secondary {
+  box-shadow: 0 0 20px rgba(79, 172, 254, 0.3);
+}
+
+.glow-orange {
+  box-shadow: 0 0 20px rgba(255, 154, 158, 0.3);
+}
+
+/* Feature card hover effects */
+.feature-card {
+  transition: all 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.1);
 }

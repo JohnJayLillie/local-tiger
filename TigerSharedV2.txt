@@ -1,0 +1,135 @@
+.
+├── database
+│   └── init.sql
+├── docker-compose.yml
+├── indexJS,txt
+├── indexJS.txt
+├── layouttsx.txt
+├── pagetsx.txt
+├── src
+│   ├── config
+│   ├── controllers
+│   ├── middleware
+│   ├── models
+│   ├── routes
+│   │   ├── image.js
+│   │   └── script.js
+│   ├── services
+│   │   ├── ai
+│   │   ├── image
+│   │   ├── script
+│   │   └── video
+│   ├── tests
+│   └── utils
+├── tiger-api
+│   ├── indexJS100.txt
+│   ├── indexJS50.txt
+│   ├── next
+│   ├── openai-service.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── pages
+│   │   └── api
+│   ├── prompt-engine.js
+│   ├── routes
+│   │   └── tiger-pipeline.js
+│   ├── services
+│   │   ├── anthropic-service.js
+│   │   ├── openai-service.js
+│   │   ├── runway-video-service.js
+│   │   └── true-crime-image-service.js
+│   ├── src
+│   │   ├── config
+│   │   ├── controllers
+│   │   ├── index.js
+│   │   ├── middleware
+│   │   ├── models
+│   │   ├── routes
+│   │   ├── services
+│   │   ├── tests
+│   │   └── utils
+│   ├── test-ai.js
+│   ├── test-services.js
+│   ├── test-true-crime.js
+│   ├── tiger-API-Full-Tree.txt
+│   ├── tiger-apiDirTere.txt
+│   ├── tiger-apiTree.txt
+│   ├── tiger-app@0.1.0
+│   ├── tiger-complete-test.js
+│   └── tigerapiTREE.txt
+├── tiger-app
+│   ├── app
+│   │   ├── components
+│   │   ├── favicon.ico
+│   │   ├── globals.css
+│   │   ├── layout.tsx
+│   │   └── page.tsx
+│   ├── components
+│   ├── eslint.config.mjs
+│   ├── next-env.d.ts
+│   ├── next.config.ts
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── postcss.config.mjs
+│   ├── public
+│   │   ├── file.svg
+│   │   ├── globe.svg
+│   │   ├── next.svg
+│   │   ├── vercel.svg
+│   │   └── window.svg
+│   ├── README.md
+│   ├── supabase
+│   ├── test-true-crime.js
+│   ├── tiger-APP-Full-Tree.txt
+│   ├── tiger-appTree.txt
+│   ├── tiger-backend
+│   │   └── supabase
+│   └── tsconfig.json
+├── tiger-web
+│   ├── components
+│   │   └── CurvedTabs.jsx
+│   ├── eslint.config.mjs
+│   ├── indexJSSed.txt
+│   ├── next-env.d.ts
+│   ├── next.config.js
+│   ├── package-lock.json
+│   ├── package.json
+│   ├── pages
+│   │   ├── _app.js
+│   │   ├── _document.js
+│   │   ├── _error.js
+│   │   ├── api
+│   │   ├── create.js
+│   │   ├── index-backup.js
+│   │   ├── index.js
+│   │   ├── index.js.bu
+│   │   ├── indexOLD.js
+│   │   └── results
+│   ├── pagesIndexJS50.txt
+│   ├── postcss.config.js
+│   ├── postcss.config.mjs
+│   ├── public
+│   │   ├── file.svg
+│   │   ├── globe.svg
+│   │   ├── next.svg
+│   │   ├── vercel.svg
+│   │   └── window.svg
+│   ├── README.md
+│   ├── src
+│   ├── styles
+│   │   └── globals.css
+│   ├── tailwind.config.js
+│   ├── tiger-webTree.txt
+│   ├── tiger-Wweb-Full-Tree.txt
+│   ├── tiger-WWWTree.txt
+│   ├── tree3.txt
+│   ├── tsconfig.json
+│   └── twebTREE.txt
+├── tigerdirlist.txt
+├── tigerGIT
+├── tigerGIT.pub
+├── TigerSharedV2.txt
+├── tigertree.txt
+└── Tree3Paths.txt
+
+45 directories, 88 files
